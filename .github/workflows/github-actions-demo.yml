@@ -25,7 +25,7 @@ jobs:
     - name: Install Dependence
       run: pip install requests
     - name: Run main.py
-      run: pyhton main.py
+      run: python main.py
     - name: List
       run: ls
     - name: Upload to this repo
