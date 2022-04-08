@@ -11,12 +11,9 @@ jobs:
     
     steps:
     - uses: actions/checkout@v3
-      with:
-        ref: biechuyangwang-patch-1
     - name: Clear Previous
       run: |
         rm -f -- *.jpg
-        rm -f -- *.png
     - name: Setup Python environment
       uses: actions/setup-python@v3
       with:
