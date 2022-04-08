@@ -8,10 +8,13 @@ if __name__ == '__main__':
     }
     start_url = "https://cn.bing.com/HPImageArchive.aspx?format=js&idx=0&n=1"
     response1 = requests.get(start_url, headers=headers, timeout=5)
-    # for i in range(10):
-    url = "https://www.bing.com" + response1.json()['images'][0]['urlbase'] + "_UHD.jpg"
-    file_name = response1.json()['images'][0]['copyright'].split('(')[0]
-    response2 = requests.get(url, headers=headers, timeout=5)
-    image = Image.open(BytesIO(response2.content))
-    image.save('./{}.jpg'.format(file_name))
-    print(file_name)
+    for i in range(10):
+        url = "https://www.bing.com" + response1.json()['images'][i]['urlbase'] + "_UHD.jpg"
+        filename = response1.json()['images'][i]['copyright'].split('(')[0]
+        filepath = './img/' + filename + '.jpg'
+        if os.path.exists(filepath):
+            continue
+        response2 = requests.get(url, headers=headers, timeout=5)
+        image = Image.open(BytesIO(response2.content))
+        image.save(filepath)
+        print(filepath)
