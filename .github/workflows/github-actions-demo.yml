@@ -39,4 +39,4 @@ jobs:
       if: failure()
       run: |
         ls
-        echo "Error on running!"
+        echo "Error on running!!"
