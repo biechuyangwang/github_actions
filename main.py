@@ -1,3 +1,7 @@
+import requests
+from PIL import Image
+from io import BytesIO
+
 def make_print_to_file(path='./'): # 标准输出重定向
     '''
     path， it is a path for save your log about fuction print
@@ -31,4 +35,11 @@ def make_print_to_file(path='./'): # 标准输出重定向
     
 if __name__ == '__main__':
     make_print_to_file(path='./log/') # 重定型print
-    print('Hello github')
+    # print('Hello github')
+    start_url = "https://cn.bing.com/HPImageArchive.aspx?format=js&idx=0&n=1"
+    response1 = requests.get(start_url)
+    url = "https://www.bing.com" + response1.json()['images'][0]['urlbase'] + "_UHD.jpg"
+    filename = response1.json()['images'][0]['copyright'].split(' ')[0]
+    response2 = requests.get(url)
+    image = Image.open(BytesIO(response2.content))
+    image.save('./{}.jpg'.format(filename))
