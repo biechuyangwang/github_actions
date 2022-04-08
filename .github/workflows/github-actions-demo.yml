@@ -34,7 +34,7 @@ jobs:
         git config --global user.email "1101049446@qq.com" # 改成GitHub账号的邮箱
         git add "*.jpg" "*.png" && echo "Git Added"
         git commit -m 'upload main result' && echo "Git Committed"
-        git push -u origin biechuyangwang-patch-1 && echo "Git Pushed Origin"
+        git push -u origin biechuyangwang-patch-2 && echo "Git Pushed Origin"
     - name: Failure test
       if: failure()
       run: |
