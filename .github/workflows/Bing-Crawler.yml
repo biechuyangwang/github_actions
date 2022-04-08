@@ -1,7 +1,7 @@
 name: "Bing Crawler"
 on: 
   schedule:
-    - cron: '0/10 * * * *'
+    - cron: '55 12 * * *'
   push:
     
 jobs:
