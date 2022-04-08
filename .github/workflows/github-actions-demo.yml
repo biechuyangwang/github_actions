@@ -1,17 +1,42 @@
-name: GitHub Actions Demo
-on: [push]
+name: "Bing Crawler"
+on: 
+  schedule:
+    - cron: '0/10 * * * *'
+  push:
+    
 jobs:
-  Explore-GitHub-Actions:
+  job_1:
+    name: Python Crawler
     runs-on: ubuntu-latest
+    
     steps:
-      - run: echo "🎉 The job was automatically triggered by a ${{ github.event_name }} event."
-      - run: echo "🐧 This job is now running on a ${{ runner.os }} server hosted by GitHub!"
-      - run: echo "🔎 The name of your branch is ${{ github.ref }} and your repository is ${{ github.repository }}."
-      - name: Check out repository code
-        uses: actions/checkout@v3
-      - run: echo "💡 The ${{ github.repository }} repository has been cloned to the runner."
-      - run: echo "🖥️ The workflow is now ready to test your code on the runner."
-      - name: List files in the repository
-        run: |
-          ls ${{ github.workspace }}
-      - run: echo "🍏 This job's status is ${{ job.status }}."
+    - uses: actions/checkout@v3
+      with:
+        ref: biechuyangwang-patch-1
+    - name: Clear Previous
+      run: |
+        rm -f -- *.jpg
+        rm -f -- *.png
+    - name: Setup Python environment
+      uses: actions/setup-python@v3
+      with:
+        python-version: '3.8'
+        architecture: 'x64'
+    - name: Install Dependence
+      run: pip install requests
+    - name: Run main.py
+      run: pyhton main.py
+    - name: List
+      run: ls
+    - name: Upload to this repo
+      run: |
+        git config --global user.name "biechuyangwang" # 改成Github账号用户名
+        git config --global user.email "1101049446@qq.com" # 改成GitHub账号的邮箱
+        git add "*.jpg" "*.png" && echo "Git Added"
+        git commit -m 'upload main result' && echo "Git Committed"
+        git push -u origin biechuyangwang-patch-1 && echo "Git Pushed Origin"
+    - name: Failure test
+      if: failure()
+      run: |
+        ls
+        echo "Error on running!"
