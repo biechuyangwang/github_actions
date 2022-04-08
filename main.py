@@ -3,8 +3,6 @@ from PIL import Image
 from io import BytesIO
     
 if __name__ == '__main__':
-    make_print_to_file(path='./log/') # 重定型print
-    # print('Hello github')
     start_url = "https://cn.bing.com/HPImageArchive.aspx?format=js&idx=0&n=1"
     response1 = requests.get(start_url)
     url = "https://www.bing.com" + response1.json()['images'][0]['urlbase'] + "_UHD.jpg"
