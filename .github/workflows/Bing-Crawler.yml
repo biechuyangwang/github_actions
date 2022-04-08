@@ -1,7 +1,6 @@
 name: "Bing Crawler"
 on: 
-  schedule:
-    - cron: '55 12 * * *'
+  workflow_dispatch:
   push:
     
 jobs:
