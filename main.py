@@ -9,7 +9,7 @@ if __name__ == '__main__':
     }
     # start_url = "https://cn.bing.com/HPImageArchive.aspx?format=js&idx=0&n=8"
     start_url = "https://www.bing.com/HPImageArchive.aspx?format=js&idx=0&n=8&mkt=zh-cn"
-    response1 = requests.get(start_url, headers=headers, timeout=2)
+    response1 = requests.get(start_url, headers=headers, timeout=3)
     num = len(response1.json()['images'])
     for i in range(num):
         url = "https://www.bing.com" + response1.json()['images'][i]['urlbase'] + "_UHD.jpg"
@@ -20,7 +20,7 @@ if __name__ == '__main__':
         filepath = rootpath + filename + '.jpg'
         if os.path.exists(filepath):
             continue
-        response2 = requests.get(url, headers=headers, timeout=2)
+        response2 = requests.get(url, headers=headers, timeout=3)
         image = Image.open(BytesIO(response2.content))
         image.save(filepath)
         print(filepath)
